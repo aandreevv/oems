@@ -1,0 +1,13 @@
+<div class="people-search">
+  <form [formGroup]="searchForm" class="people-search__search">
+    <input type="text" formControlName="search" [placeholder]="'searchPeople' | translate">
+  </form>
+
+  <div class="people-search__list">
+    <app-person-card *ngFor="let person of users$ | async" [person]="person"></app-person-card>
+  </div>
+  <h1 class="people-search__title">{{ 'recommended' | translate }}</h1>
+  <div class="people-search__recommended">
+    <app-person-card *ngFor="let person of recommendedUsers$ | async" [person]="person"></app-person-card>
+  </div>
+</div>

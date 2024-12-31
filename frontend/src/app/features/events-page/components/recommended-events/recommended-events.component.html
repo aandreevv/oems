@@ -1,0 +1,12 @@
+<div class="recommended-events">
+  <ng-container *ngIf="!isLoading; else loading">
+    <app-event-card *ngFor="let event of recommendedEvents" [event]="event"></app-event-card>
+  </ng-container>
+</div>
+
+<ng-template #loading>
+  <ngx-skeleton-loader count="5" appearance="line" [theme]="{background: 'lightgray'}"></ngx-skeleton-loader>
+  <ngx-skeleton-loader count="5" appearance="line" [theme]="{background: 'lightgray'}"></ngx-skeleton-loader>
+  <ngx-skeleton-loader count="5" appearance="line" [theme]="{background: 'lightgray'}"></ngx-skeleton-loader>
+  <ngx-skeleton-loader count="5" appearance="line" [theme]="{background: 'lightgray'}"></ngx-skeleton-loader>
+</ng-template>

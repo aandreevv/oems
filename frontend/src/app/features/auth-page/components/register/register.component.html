@@ -1,0 +1,42 @@
+<form
+  class="register-form"
+  [formGroup]="registerForm"
+  (ngSubmit)="onSubmitForm()"
+>
+  <h1 class="register-form__title">Sign up</h1>
+  <label class="register-form__label">Email *
+    <input
+      class="register-form__input"
+      type="text"
+      placeholder="email@email.com"
+      formControlName="email"
+    >
+    <span
+      class="register-form__error"
+      [class.register-form__error--visible]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+    >Please enter valid email.
+    </span>
+  </label>
+  <label class="register-form__label">Password *
+    <input
+      class="register-form__input"
+      type="password"
+      placeholder="Enter your password"
+      formControlName="password"
+    >
+    <span
+      class="register-form__error"
+      [class.register-form__error--visible]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+    >Please enter valid password (min 8 symbols, at least 1 uppercase, 1 lowercase, 1 number and 1 special char).
+    </span>
+  </label>
+  <button
+    class="register-form__button"
+    type="submit" [disabled]="registerForm.invalid || (isLoading && !(error$ | async))"
+  >
+    <ng-container *ngIf="!isLoading || (error$ | async); else spinner">Sign up</ng-container>
+    <ng-template #spinner><img height="35px" src="assets/spinner/spinner.gif"></ng-template>
+  </button>
+  <span class="register-form__error register-form__error--visible" *ngIf="error$ | async as error">{{error}}</span>
+  <p class="register-form__link">Already have an account? <a [routerLink]="['../login']">Sign in</a></p>
+</form>

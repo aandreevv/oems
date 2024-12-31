@@ -1,0 +1,8 @@
+<div class="chats__page" *ngIf="userChats[0] && !isLoading">
+  <app-chat-list [selectedThreadId]="selectedThreadId" [threads]="userChats" (chatSelected)="onChatSelected($event)"></app-chat-list>
+  <ng-container *ngIf="selectedThreadId"><app-chat [threadId]="selectedThreadId"></app-chat></ng-container>
+</div>
+
+<div class="chats__empty" *ngIf="!userChats[0] && !isLoading"><span>You do not have any chats yet. Register to some event to join its chat.</span></div>
+
+<div class="chats__loading" *ngIf="isLoading"><img src="assets/spinner/spinner.gif" width="100px"></div>

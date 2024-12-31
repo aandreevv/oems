@@ -1,0 +1,33 @@
+<div class="events">
+  <div class="events__future">
+    <h2>{{ 'futureEvents' | translate }}</h2>
+    <ng-container *ngIf="!isLoading; else loading">
+      <div *ngIf="myEvents.futureEvents.length; else empty" class="events__list">
+        <app-event-card *ngFor="let event of myEvents.futureEvents" [event]="event"></app-event-card>
+      </div>
+    </ng-container>
+  </div>
+  <div class="events__past">
+    <h2>{{ 'pastEvents' | translate }}</h2>
+    <ng-container *ngIf="!isLoading; else loading">
+      <div class="events__list" *ngIf="myEvents.pastEvents.length; else empty">
+        <app-event-card *ngFor="let event of myEvents.pastEvents" [event]="event"></app-event-card>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #empty>
+  <div class="events__empty">
+    {{ 'nothingToShow' | translate }}
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="events__loading">
+    <ngx-skeleton-loader count="5" appearance="line" [theme]="{background: 'lightgray'}"></ngx-skeleton-loader>
+    <ngx-skeleton-loader count="5" appearance="line" [theme]="{background: 'lightgray'}"></ngx-skeleton-loader>
+    <ngx-skeleton-loader count="5" appearance="line" [theme]="{background: 'lightgray'}"></ngx-skeleton-loader>
+    <ngx-skeleton-loader count="5" appearance="line" [theme]="{background: 'lightgray'}"></ngx-skeleton-loader>
+  </div>
+</ng-template>

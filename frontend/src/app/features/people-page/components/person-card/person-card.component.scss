@@ -1,0 +1,66 @@
+.person-card {
+  background-color: white;
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #cef0ff;
+  }
+
+  &__avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    border: 1px solid #1B4977;
+    object-fit: cover;
+    background-color: white;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    line-height: 2.5em;
+  }
+
+  &__username {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &__full-name {
+    margin-top: -10px;
+  }
+
+  &__btn {
+    display: flex;
+    gap: 15px;
+
+    button {
+      color: white;
+      border: none;
+      font-size: 16px;
+      padding: 8px 15px;
+      cursor: pointer;
+    }
+  }
+
+  &__follow {
+    background-color: #25598E;
+    font-weight: 500;
+
+    &:hover {
+      background-color: #1B4977;
+    }
+  }
+
+  &__chat {
+    background-color: #757575;
+
+    &:hover {
+      background-color: #606060;
+    }
+  }
+}

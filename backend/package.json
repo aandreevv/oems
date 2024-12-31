@@ -1,0 +1,15 @@
+{
+  "name": "online-event-management-system-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "compose:dev": "docker-compose up --build --abort-on-container-exit",
+    "users:compose:dev:sh": "cd services/users-service && npm run compose:dev:sh",
+    "communication:compose:dev:sh": "cd services/communication-service && npm run compose:dev:sh",
+    "events:compose:dev:sh": "cd services/events-service && npm run compose:dev:sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+  }
+}

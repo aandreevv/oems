@@ -1,0 +1,12 @@
+.auth-page {
+  background-color: #E8F3FF;
+
+  &_container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__image {
+    height: calc(100vh - 80px);
+  }
+}

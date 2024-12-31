@@ -1,0 +1,135 @@
+version: '3.8'
+services:
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - "5672:5672"
+    networks:
+      - online-event-management-system-network
+
+  users-postgres:
+    image: "postgres:latest"
+    container_name: "users-postgres"
+    ports:
+      - "5433:5433"
+    environment:
+      POSTGRES_DB: "users"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "WMW17eHsBMw2IOm"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    networks:
+      - online-event-management-system-network
+    volumes:
+      - users-data:/var/lib/postgresql/data
+    command: [ "postgres", "-c", "log_statement=all", "-p 5433" ]
+
+  communication-postgres:
+    image: "postgres:latest"
+    container_name: "communication-postgres"
+    ports:
+      - "5434:5434"
+    environment:
+      POSTGRES_DB: "communication"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "WMW17eHsBMw2IOm"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    networks:
+      - online-event-management-system-network
+    volumes:
+      - communication-data:/var/lib/postgresql/data
+    command: [ "postgres", "-c", "log_statement=all", "-p 5434" ]
+
+  events-postgres:
+    image: "postgres:latest"
+    container_name: "events-postgres"
+    ports:
+      - "5435:5435"
+    environment:
+      POSTGRES_DB: "events"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "WMW17eHsBMw2IOm"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    networks:
+      - online-event-management-system-network
+    volumes:
+      - events-data:/var/lib/postgresql/data
+    command: [ "postgres", "-c", "log_statement=all", "-p 5435" ]
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api-gateway:/usr/src/app
+    networks:
+      - online-event-management-system-network
+    depends_on:
+      - users-service
+      - communication-service
+      - events-service
+    command: npm run start:dev
+
+  users-service:
+    build:
+      context: ./services/users-service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./services/users-service:/usr/src/app
+    networks:
+      - online-event-management-system-network
+    depends_on:
+      - users-postgres
+    command: npm run start:dev
+
+  communication-service:
+    build:
+      context: ./services/communication-service
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./services/communication-service:/usr/src/app
+    networks:
+      - online-event-management-system-network
+    depends_on:
+      - communication-postgres
+    command: npm run start:dev
+
+  events-service:
+    build:
+      context: ./services/events-service
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./services/events-service:/usr/src/app
+    networks:
+      - online-event-management-system-network
+    depends_on:
+      - events-postgres
+    command: npm run start:dev
+
+  uploads-service:
+    build:
+      context: ./services/uploads-service
+      dockerfile: Dockerfile
+    ports:
+      - "3004:3004"
+    volumes:
+      - ./services/uploads-service:/usr/src/app
+    networks:
+      - online-event-management-system-network
+    command: npm run start:dev
+
+volumes:
+  users-data:
+  communication-data:
+  events-data:
+
+networks:
+  online-event-management-system-network:
+    external: true

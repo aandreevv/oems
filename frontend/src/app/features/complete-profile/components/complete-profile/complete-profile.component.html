@@ -1,0 +1,32 @@
+<div class="_container">
+  <h1>It's time to set up your profile!</h1>
+  <form
+    *ngIf="isMainInfoMode;"
+    class="complete-profile"
+    [formGroup]="completeProfileForm"
+    (ngSubmit)="sendCompleteProfileData()"
+  >
+    <label>Full name *
+      <input class="complete-profile__input" type="text" placeholder="Full name" formControlName="fullName">
+    </label>
+    <label>Username *
+      <input class="complete-profile__input" type="text" placeholder="Username" formControlName="username">
+    </label>
+    <label>Birthday *
+      <input class="complete-profile__input" type="date" placeholder="Birthday" formControlName="dateOfBirth">
+    </label>
+    <label>Phone number *
+      <input class="complete-profile__input" type="text" placeholder="+38(0XX)-XX-XX-XXX" formControlName="phoneNumber">
+    </label>
+    <label>Job position
+      <textarea class="complete-profile__input" placeholder="Type your job position" formControlName="bio"></textarea>
+    </label>
+    <label>Language *
+      <select class="complete-profile__select" formControlName="language">
+        <option [value]="Language.UKRAINIAN">Ukrainian</option>
+        <option [value]="Language.ENGLISH">English</option>
+      </select>
+    </label>
+    <button type="submit" class="complete-profile__button" [disabled]="completeProfileForm.invalid">Submit</button>
+  </form>
+</div>

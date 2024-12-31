@@ -1,0 +1,23 @@
+<div *ngIf="user$ | async as user">
+  <div class="profile">
+    <div class="profile__avatar">
+      <img *ngIf="user.profile.picture; else defaultPhoto" [src]="user.profile.picture" alt="User profile photo" class="profile__photo">
+      <ng-template #defaultPhoto><img src="../../../../../assets/images/default_avatar.png" alt="User default profile photo" class="profile__photo"></ng-template>
+    </div>
+    <div class="profile__info">
+      <div class="profile__info-header">
+        <div class="profile__name">{{user.profile.username}}</div>
+      </div>
+      <div class="profile__statistic">
+        <span><span class="profile__statistic--bold">{{ user.profile.data.events }}</span> {{ 'eventsLower' | translate }}</span>
+      </div>
+      <div class="profile__full-name">{{user.profile.fullName}}</div>
+      <div *ngIf="user.profile.bio" class="profile__bio">{{user.profile.bio}}</div>
+      <div *ngIf="connections$ | async as connections" class="profile__connections">
+        <a *ngFor="let connection of connections" [href]="connection.url" target="_blank">
+          <img src="assets/icons/{{connection.type}}.svg" alt="{{connection.type}} link">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="home-page" style="position: relative">
+  <app-side-bar style="position: fixed" [sideBarOpen]="sideBarOpen" (sideBarToggle)="toggleSideBar()"></app-side-bar>
+  <div class="home-page__container" [class.home-page__container--open]="sideBarOpen">
+    <div class="home-page__content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

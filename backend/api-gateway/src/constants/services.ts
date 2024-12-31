@@ -1,0 +1,4 @@
+export const USERS_SERVICE = 'USERS';
+export const COMMUNICATION_SERVICE = 'COMMUNICATION';
+export const EVENTS_SERVICE = 'EVENTS';
+export const UPLOADS_SERVICE = 'UPLOADS';

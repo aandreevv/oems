@@ -1,0 +1,8 @@
+<div class="chat-list">
+  <h2 class="chat-list__title">{{ 'chatThreads' | translate }}</h2>
+  <ul class="chat-list__list">
+    <li class="chat-list__item" *ngFor="let thread of threads" (click)="selectChat(thread.id)">
+      {{ thread.topic }}
+    </li>
+  </ul>
+</div>

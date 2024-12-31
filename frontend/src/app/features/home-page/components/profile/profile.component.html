@@ -1,0 +1,91 @@
+<div *ngIf="user$ | async as user">
+  <div class="profile">
+    <div class="profile__avatar">
+      <img *ngIf="user.picture; else defaultPhoto" [src]="user.picture" alt="User profile photo" class="profile__photo">
+      <ng-template #defaultPhoto><img src="../../../../../assets/images/default_avatar.png" alt="User default profile photo" class="profile__photo"></ng-template>
+    </div>
+    <div class="profile__info">
+      <div class="profile__info-header">
+        <div class="profile__name">{{user.username}}</div>
+        <button class="profile__edit" (click)="isEditProfileModalVisible = true">{{'editProfile' | translate}}</button>
+      </div>
+      <div class="profile__statistic">
+        <span><span class="profile__statistic--bold">{{ user.events }}</span> {{ 'eventsLower' | translate }}</span>
+      </div>
+      <div class="profile__full-name">{{user.fullName}}</div>
+      <div *ngIf="user.bio" class="profile__bio">{{user.bio}}</div>
+      <div *ngIf="connections" class="profile__connections">
+        <a *ngFor="let connection of connections" [href]="connection.url" target="_blank">
+          <img src="assets/icons/{{connection.type}}.svg" alt="{{connection.type}} link">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal [isVisible]="isEditProfileModalVisible" (closeModal)="closeEditProfileModal()">
+  <div class="profile__edit-modal">
+    <h2>{{ 'editProfile' | translate }}</h2>
+    <form [formGroup]="editProfileForm" class="edit-profile">
+      <div class="avatar">
+        <input type="file" class="hidden" id="file" formControlName="image" (change)="onFileSelected($event)">
+        <label *ngIf="!(user$ | async)?.picture" for="file">
+          <div class="hover-img"></div>
+          <img [src]="previewUrl || '../../../../../assets/images/default_avatar.png'" class="image" alt="User Default Avatar">
+        </label>
+        <label *ngIf="(user$ | async)?.picture as picture" for="file">
+          <div class="hover-img">
+            <img class="pre-image" src="../../../../../assets/images/pre-image.svg" alt="User Default Avatar">
+          </div>
+          <img [src]="previewUrl || picture" class="image" alt="User Avatar">
+        </label>
+      </div>
+      <div class="edit-profile__grid">
+        <label>{{ 'fullName' | translate }} *
+          <input class="edit-profile__input" type="text" placeholder="Full name" formControlName="fullName">
+        </label>
+        <label>{{ 'userName' | translate }} *
+          <input class="edit-profile__input" type="text" placeholder="Username" formControlName="username">
+        </label>
+        <label>{{ 'birthday' | translate }} *
+          <input class="edit-profile__input" type="date" placeholder="Birthday" formControlName="dateOfBirth">
+        </label>
+        <label>{{ 'phoneNumber' | translate }} *
+          <input class="edit-profile__input" type="text" placeholder="+38(0XX)-XX-XX-XXX" formControlName="phoneNumber">
+        </label>
+        <label>{{ 'bio' | translate }}
+          <textarea class="edit-profile__input" placeholder="Type something about yourself" formControlName="bio"></textarea>
+        </label>
+        <label>{{ 'language' | translate }} *
+          <select class="edit-profile__select" formControlName="language">
+            <option [value]="Language.UKRAINIAN">{{ 'ukrainian' | translate }}</option>
+            <option [value]="Language.ENGLISH">{{ 'english' | translate }}</option>
+          </select>
+        </label>
+      </div>
+      <button class="edit-profile__button" (click)="submitForm()" [disabled]="!isAvailableToSave || isLoading">
+        <span *ngIf="!isLoading">{{ 'save' | translate }}</span>
+        <img *ngIf="isLoading" src="assets/spinner/spinner.gif" alt="Spinner">
+      </button>
+
+      <span class="edit-profile__error" *ngIf="error$ | async as error">{{error}}</span>
+    </form>
+  </div>
+</app-modal>
+
+<app-modal [isVisible]="isAddConnectionsModalOpen" (closeModal)="closeAddConnectionsModal()">
+  <div class="profile__connections-modal">
+    <h2>{{ 'yourSocialMedia' | translate }}</h2>
+    <div class="profile__connections-modal--connections">
+      <div *ngFor="let connection of userConnectionsUI" class="profile__connections-modal--connection">
+        <span>{{ connection.name }}:</span>
+        <a *ngIf="connection.value" [href]="connection.value" target="_blank">{{connection.value}}</a>
+        <div *ngIf="!connection.value">
+          <input [(ngModel)]="connection.newValue" type="text">
+          <button (click)="saveConnection(connection.name, connection.newValue)">{{ 'save' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-modal>
+

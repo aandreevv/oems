@@ -1,0 +1,14 @@
+<div class="event-invite">
+  <h2 class="event-invite__title">{{ 'invitePeopleToYourEvent' | translate }}</h2>
+  <form [formGroup]="searchForm" class="event-invite__search">
+    <input type="text" formControlName="search" [placeholder]="'eventsSearchPlaceholder' | translate">
+  </form>
+
+  <div class="event-invite__people">
+    <div *ngFor="let user of users$ | async" class="event-invite__person">
+      <p>{{user.profile.username}}</p>
+      <button (click)="invitePersonToEvent(user.id)">{{ 'invite' | translate }}</button>
+    </div>
+  </div>
+
+</div>

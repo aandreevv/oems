@@ -1,0 +1,94 @@
+h1 {
+  font-size: 24px;
+  text-align: center;
+  margin: 50px 0 40px;
+  color: #1B4977;
+}
+
+.complete-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #1B4977;
+  }
+
+  select {
+    width: 350px;
+    height: 30px;
+  }
+
+  textarea {
+    width: 350px;
+    height: 60px;
+    resize: none;
+  }
+
+  &__input {
+    width: 350px;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid #1B4977;
+    background-color: transparent;
+    font-size: 14px;
+    line-height: 17px;
+    padding: 0 0 5px 0;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__button {
+    width: 140px;
+    height: 35px;
+    background-color: #764B77;
+    color: #fff;
+    border: none;
+    margin-bottom: 20px;
+
+    &:hover {
+      background-color: #AA6DAC;
+      cursor: pointer;
+    }
+
+    &:disabled {
+      background-color: #AF9FBB;
+      cursor: not-allowed;
+    }
+  }
+
+  &__interests {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 850px;
+    column-gap: 50px;
+    row-gap: 10px;
+    margin: 0 auto;
+  }
+
+  &__subtitle {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  &__error {
+    display: block;
+    text-align: center;
+    color: red;
+  }
+}

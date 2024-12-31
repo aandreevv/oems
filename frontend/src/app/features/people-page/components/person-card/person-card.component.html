@@ -1,0 +1,7 @@
+<div class="person-card" (click)="navigateToUserProfile()">
+  <img class="person-card__avatar" [src]="person.profile.picture || 'assets/images/default_avatar.png'" alt="{{person.profile.fullName}} profile photo">
+  <div class="person-card__info">
+    <span class="person-card__username">{{person.profile.username}}</span>
+    <span class="person-card__full-name">{{person.profile.fullName}}</span>
+  </div>
+</div>

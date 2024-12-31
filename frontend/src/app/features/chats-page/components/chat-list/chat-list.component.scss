@@ -1,0 +1,32 @@
+.chat-list {
+  background-color: white;
+  height: 88vh;
+  border-right: 0.063rem solid rgb(221, 221, 221);
+  width: 250px;
+
+  &__title {
+    font-size: 1.1rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+    margin-right: 0.125rem;
+    text-overflow: ellipsis;
+    overflow-y: hidden;
+    border-bottom: 0.063rem solid rgb(149, 149, 149);
+    padding: 0 15px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    padding: 20px 15px;
+    border-bottom: 0.063rem solid rgb(221, 221, 221);
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d5d5d5;
+    }
+  }
+}

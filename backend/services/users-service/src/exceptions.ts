@@ -1,0 +1,16 @@
+export const ACCOUNT_IS_NOT_FOUND = 'Account is not found!';
+export const USER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'User with such email already exists!';
+export const PASSWORD_IS_INVALID = 'Password is invalid!';
+export const USER_WITH_SUCH_EMAIL_IS_NOT_FOUND = 'User with such email is not found!';
+export const USER_WITH_SUCH_USERNAME_ALREADY_EXISTS = 'User with such username already exists!';
+export const PROFILE_IS_ALREADY_SET = 'Profile is already set!';
+export const USER_WITH_SUCH_PHONE_NUMBER_IS_ALREADY_EXISTS = 'User with such phone number already exists!';
+export const USER_IS_ALREADY_FOLLOWED = 'User is already followed!';
+export const USER_IS_NOT_FOLLOWED = 'User is not followed!';
+export const CAN_NOT_FOLLOW_OURSELF = 'Can not follow yourself!';
+export const CONNECTION_IS_NOT_FOUND = 'Connection is not found!';
+export const INTEREST_IS_NOT_FOUND = 'Interest is not found!';
+export const INTEREST_IS_ALREADY_ADDED = 'Interest is already added!';
+export const CONNECTION_IS_ALREADY_ADDED = 'Connection is already added!';
+export const ACCOUNT_IS_ALREADY_CONFIGURED = 'Account is already configured!';
+export const CAN_NOT_FIND_RECOMMENDED_USERS = 'Can not find recommended users! Try to add some interests!';

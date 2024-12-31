@@ -1,0 +1,79 @@
+<div class="events-search">
+  <div class="events-search__header">
+    <form [formGroup]="searchForm" class="events-search__search">
+      <input type="text" formControlName="search" [placeholder]="'eventsSearchPlaceholder' | translate">
+    </form>
+    <button class="events-search__create" (click)="openCreateEventModal()">{{ 'createEventBtn' | translate }}</button>
+  </div>
+
+  <div class="events-search__list">
+    <app-event-card *ngFor="let event of events$ | async" [event]="event"></app-event-card>
+  </div>
+
+  <div class="events-search__tabs">
+    <span class="events-search__tab" routerLink="recommended" [routerLinkActive]="'events-search__tab--active'">{{ 'recommended' | translate }}</span>
+    <span class="events-search__tab" routerLink="my-events" [routerLinkActive]="'events-search__tab--active'">{{ 'myEvents' | translate }}</span>
+    <span class="events-search__tab" routerLink="invites" [routerLinkActive]="'events-search__tab--active'">{{ 'invites' | translate }}</span>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+
+<app-modal [isVisible]="isCreateEventModalOpen" (closeModal)="closeCreateEventModal()">
+  <div class="event-create__modal">
+    <h2 class="event-create__title">{{ 'createEventBtn' | translate }}</h2>
+    <form class="event-create__form" [formGroup]="createEventForm" (ngSubmit)="submitForm()">
+      <div class="event-create__group">
+        <label class="event-create__label">{{ 'eventName' | translate }}
+          <input class="event-create__input event-create__name" type="text" [placeholder]="'eventNamePlaceholder' | translate" formControlName="name">
+        </label>
+        <label class="event-create__label">{{ 'date' | translate }}
+          <input class="event-create__input event-create__date" type="date" formControlName="date">
+        </label>
+        <div class="event-create__label">{{ 'time' | translate }}
+          <input class="event-create__input" type="time" formControlName="time">
+        </div>
+      </div>
+      <label class="event-create__label">{{ 'description' | translate }}
+        <textarea class="event-create__textarea" [placeholder]="'eventDescriptionPlaceholder' | translate" formControlName="description"></textarea>
+      </label>
+      <div class="event-create__radio-group">
+        <div class="event-create__radio">{{ 'access' | translate }}
+          <label>
+            <input class="event-create__input" type="radio" name="access" formControlName="access" [value]="EventAccessType.PUBLIC">{{ 'public' | translate }}
+          </label>
+          <label>
+            <input class="event-create__input" type="radio" name="access" formControlName="access" [value]="EventAccessType.PRIVATE">{{ 'private' | translate }}
+          </label>
+        </div>
+        <div class="event-create__radio">{{ 'type' | translate }}
+          <label>
+            <input class="event-create__input" type="radio" name="type" formControlName="type" [value]="EventCallType.ATTENDEE_CALL">{{ 'attendeeCall' | translate }}
+          </label>
+          <label>
+            <input class="event-create__input" type="radio" name="type" formControlName="type" [value]="EventCallType.CONSUME_ONLY_CALL">{{ 'consumeOnlyCall' | translate }}
+          </label>
+        </div>
+        <div class="event-create__paid" style="display: none">
+          <label class="event-create__checkbox">
+            <input class="event-create__input" type="checkbox" formControlName="paid" #paid>{{ 'paidEvent' | translate }}
+          </label>
+          <label class="event-create__price">{{ 'price' | translate }}
+            <input class="event-create__input" type="number" [placeholder]="'enterPrice' | translate" formControlName="price">₴
+          </label>
+        </div>
+      </div>
+      <p>{{ 'categories' | translate }}: </p>
+      <div class="event-create__categories" formGroupName="categories">
+        <div *ngFor="let interest of userInterestsArray; let i = index">
+          <label class="event-create__category">
+            <input type="checkbox" [formControlName]="interest.value" [value]="interest.value"> {{ interest.label }}
+          </label>
+        </div>
+      </div>
+      <button class="event-create__button" type="submit" [disabled]="createEventForm.invalid">
+        <span *ngIf="!isLoading">{{ 'create' | translate }}</span>
+        <img *ngIf="isLoading" src="assets/spinner/spinner.gif" alt="Spinner">
+      </button>
+    </form>
+  </div>
+</app-modal>

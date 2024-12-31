@@ -1,0 +1,18 @@
+<div class="event-card">
+  <div class="event-card__info">
+    <div class="event-card__header">
+      <h3>{{event.name}}</h3>
+      <p>{{addHoursToDate(event.date) | customDate}}</p>
+    </div>
+    <p class="event-card__description">{{event.description}}</p>
+    <div class="event-card__footer">
+      <div class="event-card__owner" (click)="openOwnerProfilePage()">
+        <img [src]="event.owner.profile.picture" alt="Event owner photo">
+        <p>{{event.owner.profile.username}}</p>
+      </div>
+      <button class="event-card__button" (click)="openEventPage()">{{ 'moreInfo' | translate }}</button>
+    </div>
+  </div>
+  <img class="event-card__image" [src]="event.image || 'https://assets-global.website-files.com/61f29c609f84a86e418fbcfb/63ecdf6e6df724eab1f0e8ca_20230215T0132-25bece5c-5ab8-4c33-98c7-60ad2668054b.webp'" alt="Event image">
+  <span class="event-card__price">{{event.access === EventAccessType.PUBLIC ? ('public' | translate) : ('private' | translate) }}</span>
+</div>

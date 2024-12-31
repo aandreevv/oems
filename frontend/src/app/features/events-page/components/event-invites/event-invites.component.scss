@@ -1,0 +1,88 @@
+.event-invites {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 550px;
+
+  &__invite {
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    margin-bottom: 1em;
+  }
+
+  &__image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+  }
+
+  &__invite-header {
+    display: flex;
+    gap: 40px;
+  }
+
+  &__invite-footer {
+    display: flex;
+    gap: 5px;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px 20px 20px 0;
+  }
+
+  &__accept {
+    background-color: green;
+    border: none;
+    padding: 7px;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #1d9c1d;
+    }
+  }
+
+  &__more-info {
+    background-color: #0c6da8;
+    border: none;
+    padding: 7px;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #1090dd;
+    }
+  }
+
+  &__decline {
+    background-color: red;
+    border: none;
+    padding: 7px;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d34040;
+    }
+  }
+
+  &__username {
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  &__sent {
+    font-weight: 500;
+  }
+}

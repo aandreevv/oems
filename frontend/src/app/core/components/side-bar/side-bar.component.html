@@ -1,0 +1,62 @@
+<div class="side-bar" [class.side-bar--collapsed]="!sideBarOpen">
+  <div class="side-bar__logo" (click)="toggleSideBar()">
+    <ng-container *ngIf="sideBarOpen">
+      <img src="assets/icons/arrow-back.svg" alt="Arrow back icon" >
+      <span>SyncConnect</span>
+    </ng-container>
+    <img *ngIf="!sideBarOpen" src="assets/icons/menu.svg" alt="Menu icon">
+  </div>
+  <nav class="side-bar__nav">
+    <ul class="side-bar__list">
+      <li class="side-bar__item">
+        <a
+          class="side-bar__link"
+          routerLinkActive="side-bar__link--active"
+          [routerLink]="['/dashboard/events']"
+        >
+          <img src="assets/icons/event.svg">
+          <span *ngIf="sideBarOpen">{{ 'events' | translate }}</span>
+        </a>
+      </li>
+      <li class="side-bar__item">
+        <a
+          class="side-bar__link"
+          routerLinkActive="side-bar__link--active"
+          [routerLink]="['/dashboard/profile']"
+        >
+          <img src="assets/icons/profile.svg">
+          <span *ngIf="sideBarOpen">{{ 'profile' | translate }}</span>
+        </a>
+      </li>
+      <li class="side-bar__item">
+        <a
+          class="side-bar__link"
+          routerLinkActive="side-bar__link--active"
+          [routerLink]="['/dashboard/people']"
+        >
+          <img src="assets/icons/people.svg">
+          <span *ngIf="sideBarOpen">{{ 'people' | translate }}</span>
+        </a>
+      </li>
+      <li class="side-bar__item">
+        <a
+          class="side-bar__link"
+          routerLinkActive="side-bar__link--active"
+          [routerLink]="['/dashboard/chats']"
+        ><img src="assets/icons/chat.svg">
+          <span *ngIf="sideBarOpen">{{ 'chats' | translate }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="side-bar__line"></div>
+  <div class="side-bar__user" *ngIf="user$ | async as user">
+    <img *ngIf="user.picture; else defaultPhoto" [src]="user.picture" alt="User profile photo" class="side-bar__user-photo">
+    <ng-template #defaultPhoto><img src="../../../../assets/images/default_avatar.png" alt="Default user profile photo" class="side-bar__user-photo"></ng-template>
+    <span *ngIf="sideBarOpen">{{user.username}}</span>
+  </div>
+  <div class="side-bar__logout" (click)="logout()">
+    <img src="assets/icons/logout.svg" alt="Logout icon">
+    <span *ngIf="sideBarOpen">{{ 'logOut' | translate }}</span>
+  </div>
+</div>
